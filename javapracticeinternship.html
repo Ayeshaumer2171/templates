@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .quote-container {
+      width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .quote {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .author {
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="quote-container">
+    <div class="quote" id="quote"></div>
+    <div class="author" id="author"></div>
+    <button class="btn" onclick="generateQuote()">Generate Quote</button>
+  </div>
+
+  <script>
+    var quotes = [
+      {
+        quote: "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+        author: "Nelson Mandela"
+      },
+      {
+        quote: "The way to get started is to quit talking and begin doing.",
+        author: "Walt Disney"
+      },
+      {
+        quote: "Your time is limited, don't waste it living someone else's life.",
+        author: "Steve Jobs"
+      },
+      {
+        quote: "If life were predictable it would cease to be life, and be without flavor.",
+        author: "Eleanor Roosevelt"
+      },
+      {
+        quote: "Life is what happens when you're busy making other plans.",
+        author: "John Lennon"
+      }
+    ];
+
+    function generateQuote() {
+      var randomIndex = Math.floor(Math.random() * quotes.length);
+      var quoteElement = document.getElementById("quote");
+      var authorElement = document.getElementById("author");
+
+      quoteElement.textContent = quotes[randomIndex].quote;
+      authorElement.textContent = "- " + quotes[randomIndex].author;
+    }
+  </script>
+</body>
+</html>

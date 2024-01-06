@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.gallery-item {
+  position: relative;
+  width: calc(33.33% - 20px);
+  margin: 10px;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.2s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-item .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+}
+
+.gallery-item .overlay-content {
+  text-align: center;
+}
+
+.gallery-item .overlay-content h3 {
+  margin-top: 0;
+}
+
+.gallery-item .overlay-content p {
+  margin-bottom: 0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="gallery">
+  <div class="gallery-item">
+    <a href="#"><img src="https://cdn.shopify.com/s/files/1/2277/5269/products/44_5_4e3e26c2-c508-4e94-b30c-696bb05bc00c.jpg?v=1679898405" alt="Image 1"></a>
+  </div>
+  <div class="gallery-item">
+    <a href="#"><img src="https://cdn.shopify.com/s/files/1/2277/5269/products/48_6_4b34e512-ffe2-4531-953d-d93aefa65bc8.jpg?v=1679898836" alt="Image 2"></a>
+  </div>
+  <div class="gallery-item">
+    <a href="#"><img src="https://cdn.shopify.com/s/files/1/2277/5269/products/127_1_7f282bfb-7d3b-42df-8617-3040dffa55c1.jpg?v=1679741532" alt="Image 3"></a>
+  </div>
+  <div class="gallery-item">
+    <a href="#"><img src="https://cdn.shopify.com/s/files/1/2277/5269/products/77_48931c46-eecd-48d1-a2ab-6c6e917fdb19.jpg?v=1677318336" alt="Image 4"></a>
+  </div>
+</div>
+
+</body>
+<script>
+    // Create overlay for each gallery item
+const galleryItems = document.querySelectorAll(".gallery-item");
+galleryItems.forEach(item => {
+  const link = item.querySelector("a");
+  const caption = link.getAttribute("data-caption");
+
+  const overlay = document.createElement("div");
+  overlay.classList.add("overlay");
+
+  const overlayContent = document.createElement("div");
+  overlayContent.classList.add("overlay-content");
+
+  const captionHeading = document.createElement("h3");
+  captionHeading.textContent = caption;
+
+  overlayContent.appendChild(captionHeading);
+  overlay.appendChild(overlayContent);
+  link.appendChild(overlay);
+});
+
+</script>
+</html>

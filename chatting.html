@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbot Example</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <style>
+   body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+    }
+
+    .chat-container {
+      max-width: 400px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .chat-header {
+      background-color: #f2f2f2;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .chat-messages {
+      max-height: 200px;  /* Adjust the maximum height as needed */
+      overflow-y: scroll;
+      padding: 10px;
+    }
+
+    .message {
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .user {
+      background-color: #e2f3ff;
+      text-align: right;
+    }
+
+    .bot {
+      background-color: #f5f5f5;
+    }
+
+    .chat-input {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: #f2f2f2;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+
+    .chat-input button {
+      padding: 5px 10px;
+      margin-left: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .chat-input button:hover {
+      background-color: #45a049;
+    }
+
+    /* Custom Navbar Styles */
+     .navbar {
+      background-color: #3b5998;
+      padding: 10px;
+      margin-bottom: 20px;
+  
+    }
+
+    .navbar-brand {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+
+    }
+
+
+
+    .navbar .btn {
+      margin-left: 10px;
+    }
+.navbar-nav{
+    float: right;
+    margin-top: -50px;
+}
+.btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #45a049;
+}
+
+.btn:focus {
+  outline: none;
+} 
+/* CSS styles for larger screens */
+@media screen and (min-width: 768px) {
+  .chat-container {
+    max-width: 600px;
+  }
+}
+
+/* CSS styles for smaller screens */
+@media screen and (max-width: 767px) {
+  .chat-container {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* CSS styles for navigation bar */
+@media screen and (max-width: 767px) {
+      .chat-container {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Adjust font size for smaller screens */
+      .message-content {
+        font-size: 16px;
+      }
+
+      /* Adjust styles for navigation bar */
+      .navbar-brand {
+        font-size: 18px;
+      }
+
+      .navbar-nav {
+        float: none;
+        margin-top: 10px;
+        text-align: center;
+      }
+.navbar{
+  display: flex;
+  flex-direction: column;
+}
+      .navbar .btn {
+        margin-left: 0;
+        margin-top: 10px;
+        display: block;
+      }
+
+      .inputs {
+        padding-left: 10px;
+        padding-top: 10px;
+      }
+
+      .inputs input {
+        width: 100%;
+      }
+    }
+.message-content {
+      font-size: 20px; /* Adjust the font size as desired */
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navy" style="display: flex;">
+       <h1 style="color: white;">Facebook</h1>
+        <div class="inputs" style="float: right; padding-top:20px ;padding-left: 300px;">
+          <input type="text" placeholder="search here" style="width: 300px; height: 20px;" >
+          <i class="fas fa-search" style="color: white;cursor: pointer;"></i>
+        </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+           
+       <button class="btn">sign up</button>
+        
+            
+          <button class="btn">log in</button>
+           
+          </ul>
+        </div>
+      </nav>
+     
+      <div class="chat-container">
+        <div class="chat-header">
+          <div class="chat-icons" style="float: right;font-size: 20px;cursor: pointer;">
+            <i class="fas fa-phone"></i> <!-- Phone icon -->
+            <i class="fas fa-chevron-down" id="dropdown-content"></i> <!-- Dropdown icon -->
+
+          </div>
+          <h2 style="display: inline-block;">Chatbot</h2>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input">
+          <input type="text" id="user-input" placeholder="Type your message...">
+          <button id="send-btn">Send</button>
+        </div>
+      </div>
+      
+      
+
+  <script>
+    // Conversation topics and responses
+    const conversationTopics = {
+      greeting: ['Hi there!', 'Hello!', 'Hey! How can I assist you?'],
+      weather: ['The weather is sunny today.', 'It\'s raining outside.'],
+      inquiry: [
+        'How can I help you?',
+        'What can I assist you with?',
+        'Do you have any specific questions?'
+      ],
+      question1: ['I am fine'],
+      question2: ['nothing special'],
+      question3: ['awesome'],
+
+  bye1:['ok, will talk later'],
+  bye2:['good bye'],
+    };
+
+    function generateResponse(userMessage) {
+      const lowercaseMessage = userMessage.toLowerCase();
+
+      if (lowercaseMessage.includes('hi') || lowercaseMessage.includes('hello')) {
+        displayMessage(getRandomResponse('greeting'), 'bot');
+      } else if (lowercaseMessage.includes('weather')) {
+        displayMessage(getRandomResponse('weather'), 'bot');
+      } else if (lowercaseMessage.includes('help')) {
+        displayMessage(getRandomResponse('inquiry'), 'bot');
+      } else if (lowercaseMessage.includes('How do you do?')) {
+        displayMessage(getRandomResponse('question1'), 'bot');
+      } else if (lowercaseMessage.includes('what are you doing?')) {
+        displayMessage(getRandomResponse('question2'), 'bot');
+      } else if (lowercaseMessage.includes('how is your day?')) {
+        displayMessage(getRandomResponse('question3'), 'bot');
+      }else if (lowercaseMessage.includes('see you')) {
+        displayMessage(getRandomResponse('bye1'), 'bot');
+      } else if (lowercaseMessage.includes('bye')) {
+        displayMessage(getRandomResponse('bye2'), 'bot');
+      }else {
+        displayMessage('I\'m sorry, I don\'t have the answer to that question.', 'bot');
+      }
+    }
+
+    function getRandomResponse(topic) {
+      const responses = conversationTopics[topic];
+      const randomIndex = Math.floor(Math.random() * responses.length);
+      return responses[randomIndex];
+    }
+
+    // Get DOM elements
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chatMessages = document.getElementById('chat-messages');
+
+    // Event listener for send button click
+    sendBtn.addEventListener('click', handleUserInput);
+
+    // Event listener for user pressing enter key
+    userInput.addEventListener('keyup', function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        handleUserInput();
+      }
+    });
+
+    function handleUserInput() {
+      const userMessage = userInput.value.trim();
+
+      if (userMessage !== '') {
+        displayMessage(userMessage, 'user');
+        userInput.value = '';
+        setTimeout(() => generateResponse(userMessage), 500); // Simulate delay before generating response
+      }
+    }
+
+    function displayMessage(message, sender) {
+  const messageWrapper = document.createElement('div');
+  messageWrapper.classList.add('message', sender);
+  
+  // Create a timestamp element
+  const timestamp = document.createElement('span');
+  timestamp.classList.add('timestamp');
+  const date = new Date();
+  const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  timestamp.textContent = time;
+  
+  // Create a message content element
+  const content = document.createElement('div');
+  content.classList.add('message-content');
+  content.textContent = message;
+  
+  // Append timestamp and content to the message wrapper
+  messageWrapper.appendChild(timestamp);
+  messageWrapper.appendChild(content);
+  
+  chatMessages.appendChild(messageWrapper);
+
+  // Scroll to the bottom of the chat window
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+  </script>
+</body>
+</html>

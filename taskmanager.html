@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.task-form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.task-list {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Task Manager</h1>
+
+    <div class="task-form">
+        <h2>Add Task</h2>
+        <form>
+            <label for="task-name">Task Name:</label>
+            <input type="text" id="task-name" name="task-name">
+
+            <label for="task-category">Category:</label>
+            <input type="text" id="task-category" name="task-category">
+
+            <label for="task-date">Due Date:</label>
+            <input type="date" id="task-date" name="task-date">
+
+            <label for="task-priority">Priority:</label>
+            <select id="task-priority" name="task-priority">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+
+            <input type="button" value="Add Task" onclick="addTask()">
+        </form>
+    </div>
+
+    <div class="task-list">
+        <h2>Task List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Category</th>
+                    <th>Due Date</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="task-table">
+            </tbody>
+        </table>
+    </div>
+
+    <script >
+let tasks = [];
+
+function addTask() {
+    let taskName = document.getElementById("task-name").value;
+    let taskCategory = document.getElementById("task-category").value;
+    let taskDate = document.getElementById("task-date").value;
+    let taskPriority = document.getElementById("task-priority").value;
+    let taskStatus = "Incomplete";
+
+    let task = {
+        name: taskName,
+        category: taskCategory,
+        date: taskDate,
+        priority: taskPriority,
+        status: taskStatus
+    };
+
+    tasks.push(task);
+
+    displayTasks();
+}
+
+function displayTasks() {
+    let table = document.getElementById("task-table");
+    table.innerHTML = "";
+
+    for (let i = 0; i < tasks.length; i++) {
+        let row = table.insertRow(i);
+        let task = tasks[i];
+let name = row.insertCell(0);
+let category = row.insertCell(1);
+let date = row.insertCell(2);
+let priority = row.insertCell(3);
+let status = row.insertCell(4);
+let actions = row.insertCell(5);
+name.innerHTML = task.name;
+    category.innerHTML = task.category;
+    date.innerHTML = task.date;
+    priority.innerHTML = task.priority;
+    status.innerHTML = task.status;
+    actions.innerHTML = "<button onclick='completeTask(" + i + ")'>Complete</button> <button onclick='deleteTask(" + i + ")'>Delete</button>";
+}
+}
+
+function completeTask(index) {
+tasks[index].status = "Complete";
+displayTasks();
+}
+
+function deleteTask(index) {
+tasks.splice(index, 1);
+displayTasks();
+}
+
+displayTasks(); // Display tasks when the page is loaded.
+
+
+
+
+    </script>
+</body>
+</html>

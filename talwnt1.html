@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account Dropdown Menu Using Html CSS & Vanilla Javascript</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+</head> 
+<body>
+
+    <style>
+/* Styling for the profile div navbar */
+
+.action {
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.profile {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.menu {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  background-color: #ffffff;
+  width: 250px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  /* display: none; */
+}
+
+.menu h3 {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 20px;
+  margin: 0;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.menu li:last-child {
+  border-bottom: none;
+}
+
+.menu a {
+  color: #333333;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.icons-size {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Icons Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+/* Media queries for responsive design */
+
+@media only screen and (max-width: 768px) {
+  .menu {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .menu {
+    width: 100%;
+    top: 50px;
+    left: 0;
+    border-radius: 0;
+  }
+}
+
+ /*
+body{
+    
+    height: 100vh;
+}
+
+
+
+.icons-size{
+    color: #333;
+    font-size: 14px;
+}
+.action{
+    position: fixed;
+    right: 30px;
+    top:20px
+}
+.action .profile{
+    margin-left: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 35px;
+    overflow: hidden;
+    position: relative;
+    width: 35px;
+}
+.action .profile img{
+    width: 100%;
+    top:0;
+    position: absolute;
+    object-fit: cover;
+    left: 0;
+    height: 100%;
+}
+.action .menu{
+    background-color:#FFF;
+    box-sizing:0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    padding: 10px 20px;
+    position: absolute;
+    right: -10px;
+    width: 200px;
+    transition: 0.5s;
+    top: 120px;
+    visibility: hidden;
+    opacity: 0;
+}
+.action .menu.active{
+    opacity: 1;
+    top: 80px;
+    visibility: visible;
+}
+.action .menu::before{
+    background-color:#fff;
+    content: '';
+    height: 20px;
+    position: absolute;
+    right: 30px;
+    transform:rotate(45deg);
+    top:-5px;
+    width: 20px;
+}
+.action .menu h3{
+    color: #555;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3em;
+    padding: 20px 0px;
+    text-align: left;
+    width: 100%;
+}
+.action .menu h3 div{
+    color: #818181;
+    font-size: 14px;
+    font-weight: 400;
+}
+.action .menu ul li{
+    align-items: center;
+    border-top:1px solid rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: left;
+    list-style: none;
+    padding: 10px 0px;
+}
+.action .menu ul li img{
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition:0.5s
+}
+.action .menu ul li a{
+    display: inline-block;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    padding-left: 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+.action .menu ul li:hover img{
+    opacity: 1;
+}
+.action .menu ul li:hover a{
+    color:#ff00ff;
+}
+.name{
+    display: flex;
+    padding: 5px;
+    background-color: rgb(246, 241, 241);
+    width: 200px;
+    border-radius: 5px;
+} */
+    </style>
+    
+    <div class="action">
+        <div class="name" onclick="menuToggle()">
+        <div class="profile" >
+
+            <img src="https://cdn.pixabay.com/photo/2013/07/13/11/44/penguin-158551__340.png"  alt="">
+        </div>
+        <p style="font: bold;">hello,sir!</p><br><br>
+        </div>
+        <div class="menu">
+            <h3>
+                User Account
+                <div>
+                    Welcome
+                </div>
+            </h3>
+            <ul>
+                <li>
+                    <span class="material-icons icons-size">person</span>
+                    <a href="#">My Profile</a>
+                </li>
+                <li>
+                    <span class="material-symbols-outlined">task</span>
+                    
+                    <a href="#">task board</a>
+                </li>
+                <li>
+                    <span class="material-icons icons-size">insert_comment</span>
+                    <a href="#">messages</a>
+                </li>
+                <li>
+                    <span class="material-symbols-outlined">help</span>
+                    <a href="#">help</a>
+                </li>
+
+                <li>
+                    <span class="material-icons icons-size">account_balance_wallet</span>
+                    <a href="#">balance:$2075</a>
+                </li>
+
+                <li>
+                    <span class="material-symbols-outlined">settings</span>
+                    <a href="#">setting</a>
+                </li>
+                <li>
+                    <span class="material-symbols-outlined">screen_lock_portrait</span>
+                    <a href="#">screen_lock</a>
+                </li>
+                <li>
+                    <span class="material-symbols-outlined">logout </span>
+                    <a href="#">logout</a>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+    <script>
+        // function menuToggle(){
+        //     const toggleMenu = document.querySelector('.menu');
+        //     toggleMenu.classList.toggle('active')
+        // }
+    </script>
+</body>
+</html>

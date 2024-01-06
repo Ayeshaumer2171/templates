@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    /* Styling for the quiz */
+    .quiz-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .question {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .options {
+      margin-bottom: 10px;
+    }
+
+    .option {
+      margin-bottom: 5px;
+    }
+
+    .submit-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div class="question">Q1. What is the capital of France?</div>
+    <div class="options">
+      <div class="option">
+        <input type="radio" name="q1" value="Paris"> Paris
+      </div>
+      <div class="option">
+        <input type="radio" name="q1" value="London"> London
+      </div>
+      <div class="option">
+        <input type="radio" name="q1" value="Berlin"> Berlin
+      </div>
+      <div class="option">
+        <input type="radio" name="q1" value="Rome"> Rome
+      </div>
+    </div>
+
+    <div class="question">Q2. Which year did World War II end?</div>
+    <div class="options">
+      <div class="option">
+        <input type="radio" name="q2" value="1945"> 1945
+      </div>
+      <div class="option">
+        <input type="radio" name="q2" value="1939"> 1939
+      </div>
+      <div class="option">
+        <input type="radio" name="q2" value="1918"> 1918
+      </div>
+      <div class="option">
+        <input type="radio" name="q2" value="1954"> 1954
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="submitQuiz()">Submit</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function submitQuiz() {
+      var q1 = document.querySelector('input[name="q1"]:checked');
+      var q2 = document.querySelector('input[name="q2"]:checked');
+      var result = document.getElementById("result");
+
+      if (q1 && q2) {
+        var score = 0;
+        
+        if (q1.value === "Paris") {
+          score++;
+        }
+        
+        if (q2.value === "1945") {
+          score++;
+        }
+
+        result.innerHTML = "Your score: " + score + "/2";
+      } else {
+        result.innerHTML = "Please answer all questions.";
+      }
+    }
+  </script>
+</body>
+</html>
+
+<html>
+  <head>
+    <style>
+body {
+  --hue: var(--hue-neutral);
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(var(--hue), 100%, 20%);
+}
+
+body.correct {
+  --hue: var(--hue-correct);
+}
+
+body.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.container {
+  width: 800px;
+  max-width: 80%;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px 2px;
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn {
+  --hue: var(--hue-neutral);
+  border: 1px solid hsl(var(--hue), 100%, 30%);
+  background-color: hsl(var(--hue), 100%, 50%);
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white;
+  outline: none;
+}
+
+.btn:hover {
+  border-color: black;
+}
+
+.btn.correct {
+  --hue: var(--hue-correct);
+  color: black;
+}
+
+.btn.wrong {
+  --hue: var(--hue-wrong);
+}
+
+.start-btn, .next-btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide {
+  display: none;
+}
+    </style>
+    <link rel="stylesheet" href="stylequiz.css">
+</head>
+<body>
+    <div class="container">
+    <div id="question-container" class="hide">
+      <div id="question">Question</div>
+      <div id="answer-buttons" class="btn-grid">
+        <button class="btn">Answer 1</button>
+        <button class="btn">Answer 2</button>
+        <button class="btn">Answer 3</button>
+        <button class="btn">Answer 4</button>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="start-btn" class="start-btn btn">Start</button>
+      <button id="next-btn" class="next-btn btn hide">Next</button>
+    </div>
+  </div>
+</body>
+<script src="scriptquiz.js" >
+</script>
+</html>
